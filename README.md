@@ -36,42 +36,6 @@ Oui, parfaitement et j'ai pallier à ce problème avec cette interface qui est d
         String getCommandName();
     }
 
-
-Bonjour,
- 
-Introduction
- 
-Forcé de constater que d'enregistrer ses événements dans la classe principale du plugin devient vraiment pénible à la longue, j'ai décidé de faire une classe qui fait des enregistrements de toutes les classes d'un coup grâce à une méthode. 
-Cette classe est composé de plusieurs méthodes, une pour "customiser" votre enregistrement (imaginons que vous ayez des classes qui implements de Manageable et qu'elles aient une fonction .register, grâce à mon système vous pourrez les enregistrer toutes d'un seul coup). Et deux autres, les principales qui permettent d'enregistrer les événements et les commandes.
- 
-Utilisation
- 
-Pour utiliser cette classe vous devez tout d'abord mettre ces classes dans un package : https://gist.github.com/Kwizzy-DEV/8d0fc20f31d98c0876a961216bf28e4f
-Ne vous inquiétez pas les classes ne s'appelles pas register_*.java je ne suis pas fou, c'est simplement intellij lors de l'export sur gist.github.com qui a  fait ça.
- 
-Une fois ces classes prêtes, nous allons voir comment fonctionne la classe.
-Imaginons que nous voulons enregistrer toutes les classes qui implement de Listener : 
- 
-public class Plugin extends JavaPlugin
-{
-    @Override
-    public void onEnable()
-    {
-        AutoRegister.registerEvents("fr", this);
-    }
-}
-Voilà c'est aussi simple que ça, le "fr" fait référence à la base de votre package mais peut aussi être quelque chose du genre "fr.app.listeners" et dans ce cas là cela va enregistrer toutes les classes dans le package "fr.app.listeners" et dans ses sous packages.
- 
-C'est beau non ? 
- 
-Se pose un problème plutôt de taille, les commandes pour les enregistrer il faut le nom de celle ci non ? 
-Oui, parfaitement et j'ai pallier à ce problème avec cette interface qui est sur le gist : 
- 
-@FunctionalInterface
-public interface CommandInfo
-{
-    String getCommandName();
-}
 Donc maintenant si vous voulez enregistrer automatiquement vos commandes il faudra que votre classe implement CommandExecutor, CommandInfo.
 Vous devrez ovveride #getCommandName et donc retourner un String qui sera le nom de votre command. 
  
