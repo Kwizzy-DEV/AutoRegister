@@ -125,12 +125,19 @@ Pour l'utiliser vous devrez faire un new AutoRegister(String packageName, JavaPl
 Explication des arguments : 
  
 
-`Class<? extends T> mustBePrimary`, ce paramètre est très important cela veut dire : "dans toutes les classes que je vais chercher, elle doit hériter de quelle interface en premier ?"
+ - `Class<? extends T> mustBePrimary`, ce paramètre est très important
+   cela veut dire : "dans toutes les classes que je vais chercher, elle
+   doit hériter de quelle interface en premier ?"
+ - `Consumer<T> action`, pour les débutants je vous conseil d'aller voir
+   ce tutoriel car sinon il y a moyen que vous ne comprendrez pas. En
+   gros je m'explique le consumer va vous donner  T, T = `Class<?
+   extends T> mustBePrimary` donc sera cast en mustBePrimary. Donc du
+   coup si vous faites par exemple `t -> t ->
+   Bukkit.getPluginManager().registerEvents(t, (un JavaPlugin)));` Donc
+   du coup c'est génial parceque vous pouvez faire tout ce que vous
+   voulez avec ça :)
+ - `Class... mustBeOther` c'est si votre classe doit implement d'autres
+   interfaces ;) (Utilisé dans la méthode registerCommands()
 
-`Consumer<T> action`, pour les débutants je vous conseil d'aller voir ce tutoriel car sinon il y a moyen que vous ne comprendrez pas. En gros je m'explique le consumer va vous donner 
-T, T = `Class<? extends T> mustBePrimary` donc sera cast en mustBePrimary. Donc du coup si vous faites par exemple `t -> t -> Bukkit.getPluginManager().registerEvents(t, (un JavaPlugin)));`
-Donc du coup c'est génial parceque vous pouvez faire tout ce que vous voulez avec ça :) 
-
-`Class... mustBeOther` c'est si votre classe doit implement d'autres interfaces ;) (Utilisé dans la méthode registerCommands()
  
 Voilà, faites en bonne usage :) 
