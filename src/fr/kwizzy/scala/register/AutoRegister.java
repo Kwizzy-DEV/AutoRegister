@@ -46,7 +46,7 @@ public class AutoRegister {
 
         Class[] mbp = {mustBePrimary};
         allClasses.stream().filter(aClass -> classContainInterface(aClass, combine(Class.class, mbp, mustBeOther)))
-        .forEach(aClass ->
+        .filter(aClass -> !hasAnnotation(aClass, DontRegister.class)).forEach(aClass ->
         {
             Object i = getObject(aClass);
             if (i != null)
@@ -170,7 +170,7 @@ public class AutoRegister {
         return one.equals(two);
     }
 
-    private boolean hasAnnotation(AccessibleObject m, Class<? extends Annotation> c)
+    private boolean hasAnnotation(AnnotatedElement m, Class<? extends Annotation> c)
     {
         for (Annotation annotation : m.getAnnotations())
         {
@@ -230,19 +230,9 @@ public class AutoRegister {
             return t;
         }
 
-        public void setKey(K t)
-        {
-            this.t = t;
-        }
-
         V getValue()
         {
             return v;
-        }
-
-        public void setValue(V v)
-        {
-            this.v = v;
         }
     }
 
